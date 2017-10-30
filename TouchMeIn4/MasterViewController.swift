@@ -22,12 +22,14 @@
 import UIKit
 import CoreData
 
-class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
 
+  @IBOutlet var tableView: UITableView!
   var detailViewController: DetailViewController? = nil
   var managedObjectContext: NSManagedObjectContext? = nil
-
-
+  var isAuthenticated = false
+  var didReturnFromBackground = false
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
@@ -39,16 +41,54 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         let controllers = split.viewControllers
         detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
     }
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(MasterViewController.appWillResignActive(_:)), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(MasterViewController.appDidBecomeActive(_:)), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+  }
+  
+  @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
+    
+    isAuthenticated = true
+    view.alpha = 1.0
   }
 
+  
+  func showLoginView() {
+    
+    if !isAuthenticated {
+      self.performSegue(withIdentifier: "loginView", sender: self)
+    }
+  }
+
+
   override func viewWillAppear(_ animated: Bool) {
-    clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
+   // clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
     super.viewWillAppear(animated)
   }
 
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(false)
+    self.showLoginView()
+  }
+
+  
+  @objc func appWillResignActive(_ notification : Notification) {
+    view.alpha = 0
+    isAuthenticated = false
+    didReturnFromBackground = true
+  }
+  
+  @objc func appDidBecomeActive(_ notification : Notification) {
+    if didReturnFromBackground {
+      self.showLoginView()
+      view.alpha = 1
+    }
   }
 
   @objc
@@ -70,6 +110,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
     }
   }
+  
+  @IBAction func logoutAction(_ sender: AnyObject) {
+    isAuthenticated = false
+    self.performSegue(withIdentifier: "loginView", sender: self)
+  }
 
   // MARK: - Segues
 
@@ -87,28 +132,28 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
   // MARK: - Table View
 
-  override func numberOfSections(in tableView: UITableView) -> Int {
+ func numberOfSections(in tableView: UITableView) -> Int {
     return fetchedResultsController.sections?.count ?? 0
   }
 
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     let sectionInfo = fetchedResultsController.sections![section]
     return sectionInfo.numberOfObjects
   }
 
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
     let note = fetchedResultsController.object(at: indexPath)
     configureCell(cell, withNote: note)
     return cell
   }
 
-  override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
     // Return false if you do not want the specified item to be editable.
     return true
   }
 
-  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
         let context = fetchedResultsController.managedObjectContext
         context.delete(fetchedResultsController.object(at: indexPath))

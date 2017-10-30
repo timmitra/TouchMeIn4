@@ -64,7 +64,7 @@ class LoginViewController: UIViewController {
       usernameTextField.text = storedUsername as String
     }
     
-    touchIDButton.isHidden = !touchMe.canEvaluatePolicy()
+   // touchIDButton.isHidden = !touchMe.canEvaluatePolicy()
     
   }
   
