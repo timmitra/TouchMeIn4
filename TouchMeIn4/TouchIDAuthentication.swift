@@ -23,18 +23,28 @@
 import UIKit  // change this from Foundation
 import LocalAuthentication
 
+enum BiometryType {
+  case none
+  case typeTouchID
+  case typeFaceID
+}
+
 class TouchIDAuth {
   
   var context = LAContext()
   
+  let localizedReasonString = "we use biometrics to unlock the notes."
+  
+  var authError: NSError?
+  
   func canEvaluatePolicy() -> Bool {
     
-    return context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error:nil)
+    return context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error:&authError)
   }
   
   func authenticateUser(completion: @escaping (String?) -> ()) { // have to mark it escaping
     
-    if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error:nil) {
+    if context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
       
       context.evaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics,
                              localizedReason: "Logging in with Touch ID") {
@@ -70,6 +80,32 @@ class TouchIDAuth {
     } else {
       
       completion("Touch ID not available")
+    }
+  }
+}
+
+class BiometryManager {
+  
+  var biometryType: BiometryType {
+    let context = LAContext()
+    var error: NSError?
+    
+    guard context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
+      print(error?.localizedDescription ?? "")
+      return .none
+    }
+    
+    if #available(iOS 11, *) {
+      switch context.biometryType {
+      case .none:
+        return .none
+      case .typeTouchID:
+        return .typeTouchID
+      case .typeFaceID:
+        return .typeFaceID
+      }
+    } else {
+      return .typeTouchID
     }
   }
 }
