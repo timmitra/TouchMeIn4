@@ -23,12 +23,6 @@
 import UIKit  // change this from Foundation
 import LocalAuthentication
 
-enum BiometryType {
-  case none
-  case typeTouchID
-  case typeFaceID
-}
-
 class TouchIDAuth {
   
   var context = LAContext()
@@ -80,32 +74,6 @@ class TouchIDAuth {
     } else {
       
       completion("Touch ID not available")
-    }
-  }
-}
-
-class BiometryManager {
-  
-  var biometryType: BiometryType {
-    let context = LAContext()
-    var error: NSError?
-    
-    guard context.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: &error) else {
-      print(error?.localizedDescription ?? "")
-      return .none
-    }
-    
-    if #available(iOS 11, *) {
-      switch context.biometryType {
-      case .none:
-        return .none
-      case .typeTouchID:
-        return .typeTouchID
-      case .typeFaceID:
-        return .typeFaceID
-      }
-    } else {
-      return .typeTouchID
     }
   }
 }
