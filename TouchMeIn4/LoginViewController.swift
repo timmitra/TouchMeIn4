@@ -63,9 +63,14 @@ class LoginViewController: UIViewController {
     if let storedUsername = UserDefaults.standard.value(forKey: "username") as? String {
       usernameTextField.text = storedUsername as String
     }
-    
-   // touchIDButton.isHidden = !touchMe.canEvaluatePolicy()
-    
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    let touchBool = touchMe.canEvaluatePolicy()
+    if touchBool {
+      self.touchIDButtonAction()
+    }
   }
   
   // MARK: - Action for checking username/password
@@ -139,6 +144,13 @@ class LoginViewController: UIViewController {
       }
     }
 
+  }
+  
+  @objc func dismissLogin() {
+    let faceID = TouchIDAuth()
+    faceID.authenticateUser() {_ in
+      self.performSegue(withIdentifier: "dismissLogin", sender: nil)
+    }
   }
   
   func checkLogin(username: String, password: String ) -> Bool {
