@@ -70,6 +70,8 @@ class LoginViewController: UIViewController {
     let touchBool = touchMe.canEvaluatePolicy()
     if touchBool {
       self.touchIDButtonAction()
+    } else {
+      self.touchIDButton.isHidden = true
     }
   }
   
