@@ -35,6 +35,10 @@ class LoginViewController: UIViewController {
     super.viewDidLoad()
   }
   
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   // MARK: - Action for checking username/password
   @IBAction func loginAction(sender: AnyObject) {
     
