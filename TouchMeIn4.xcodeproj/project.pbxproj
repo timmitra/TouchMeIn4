@@ -15,12 +15,10 @@
 		2A1F59C61FA4E3D300986808 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A1F59C51FA4E3D300986808 /* Assets.xcassets */; };
 		2A1F59C91FA4E3D300986808 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A1F59C71FA4E3D300986808 /* LaunchScreen.storyboard */; };
 		2A1F59D61FA4E47600986808 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1F59D31FA4E47500986808 /* LoginViewController.swift */; };
-		2A1F59DA1FA6925600986808 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1F59D81FA6925600986808 /* KeychainPasswordItem.swift */; };
-		2A1F59DB1FA6925600986808 /* TouchIDAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1F59D91FA6925600986808 /* TouchIDAuthentication.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2A1F59B61FA4E3D300986808 /* TouchMeIn4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchMeIn4.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A1F59B61FA4E3D300986808 /* TouchMeIn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchMeIn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A1F59B91FA4E3D300986808 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2A1F59BC1FA4E3D300986808 /* TouchMeIn4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TouchMeIn4.xcdatamodel; sourceTree = "<group>"; };
 		2A1F59BE1FA4E3D300986808 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -30,8 +28,6 @@
 		2A1F59C81FA4E3D300986808 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2A1F59CA1FA4E3D300986808 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2A1F59D31FA4E47500986808 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		2A1F59D81FA6925600986808 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
-		2A1F59D91FA6925600986808 /* TouchIDAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchIDAuthentication.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +52,7 @@
 		2A1F59B71FA4E3D300986808 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2A1F59B61FA4E3D300986808 /* TouchMeIn4.app */,
+				2A1F59B61FA4E3D300986808 /* TouchMeIn.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -68,8 +64,6 @@
 				2A1F59BE1FA4E3D300986808 /* MasterViewController.swift */,
 				2A1F59C01FA4E3D300986808 /* DetailViewController.swift */,
 				2A1F59D31FA4E47500986808 /* LoginViewController.swift */,
-				2A1F59D91FA6925600986808 /* TouchIDAuthentication.swift */,
-				2A1F59D81FA6925600986808 /* KeychainPasswordItem.swift */,
 				2A1F59C21FA4E3D300986808 /* Main.storyboard */,
 				2A1F59C51FA4E3D300986808 /* Assets.xcassets */,
 				2A1F59C71FA4E3D300986808 /* LaunchScreen.storyboard */,
@@ -82,9 +76,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2A1F59B51FA4E3D300986808 /* TouchMeIn4 */ = {
+		2A1F59B51FA4E3D300986808 /* TouchMeIn */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2A1F59CD1FA4E3D300986808 /* Build configuration list for PBXNativeTarget "TouchMeIn4" */;
+			buildConfigurationList = 2A1F59CD1FA4E3D300986808 /* Build configuration list for PBXNativeTarget "TouchMeIn" */;
 			buildPhases = (
 				2A1F59B21FA4E3D300986808 /* Sources */,
 				2A1F59B31FA4E3D300986808 /* Frameworks */,
@@ -94,9 +88,9 @@
 			);
 			dependencies = (
 			);
-			name = TouchMeIn4;
+			name = TouchMeIn;
 			productName = TouchMeIn4;
-			productReference = 2A1F59B61FA4E3D300986808 /* TouchMeIn4.app */;
+			productReference = 2A1F59B61FA4E3D300986808 /* TouchMeIn.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -128,7 +122,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2A1F59B51FA4E3D300986808 /* TouchMeIn4 */,
+				2A1F59B51FA4E3D300986808 /* TouchMeIn */,
 			);
 		};
 /* End PBXProject section */
@@ -156,8 +150,6 @@
 				2A1F59BD1FA4E3D300986808 /* TouchMeIn4.xcdatamodeld in Sources */,
 				2A1F59BF1FA4E3D300986808 /* MasterViewController.swift in Sources */,
 				2A1F59C11FA4E3D300986808 /* DetailViewController.swift in Sources */,
-				2A1F59DA1FA6925600986808 /* KeychainPasswordItem.swift in Sources */,
-				2A1F59DB1FA6925600986808 /* TouchIDAuthentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +324,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2A1F59CD1FA4E3D300986808 /* Build configuration list for PBXNativeTarget "TouchMeIn4" */ = {
+		2A1F59CD1FA4E3D300986808 /* Build configuration list for PBXNativeTarget "TouchMeIn" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2A1F59CE1FA4E3D300986808 /* Debug */,

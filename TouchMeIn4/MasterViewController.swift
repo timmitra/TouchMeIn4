@@ -47,6 +47,10 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     NotificationCenter.default.addObserver(self, selector: #selector(MasterViewController.appDidBecomeActive(_:)), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
   }
   
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
     
     isAuthenticated = true
@@ -122,10 +126,7 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     if segue.identifier == "showDetail" {
         if let indexPath = tableView.indexPathForSelectedRow {
         let object = fetchedResultsController.object(at: indexPath)
-            let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-            controller.detailItem = object
-            controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-            controller.navigationItem.leftItemsSupplementBackButton = true
+        (segue.destination as! DetailViewController).detailItem = object
         }
     }
   }
