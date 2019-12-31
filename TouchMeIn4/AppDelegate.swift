@@ -45,9 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     UINavigationBar.appearance().barTintColor = BarColor
     UINavigationBar.appearance().tintColor = UIColor.white
-    
-    UIApplication.shared.statusBarStyle = .lightContent
-    
+        
     let font = UIFont(name: "Avenir-Black", size: 30)!
     let regularVertical = UITraitCollection(verticalSizeClass:.regular)
     let titleDict : Dictionary = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: font]
